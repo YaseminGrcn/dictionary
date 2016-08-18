@@ -5,7 +5,11 @@ from django.conf.urls import url
 
 from . import views
 
+from .views import *
+
 urlpatterns = [
+    url(r'^profile_login/$', profile_login, name="profile_login"),
+    url(r'^profile_detail/$', profile_detail, name="profile_detail"),
     # URL pattern for the UserListView
     url(
         regex=r'^$',
@@ -33,4 +37,6 @@ urlpatterns = [
         view=views.UserUpdateView.as_view(),
         name='update'
     ),
+
+
 ]

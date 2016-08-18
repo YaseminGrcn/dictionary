@@ -43,10 +43,10 @@
     			<div class="col-lg-2"></div>{% if request.user.is_authenticated %}
     			<div class="col-lg-2 pull-left">
 
-                <a class="nav-link" href="{% url 'profile_detail' %}">{% trans "Profilim" %}</a>
+                <a class="nav-link" href="{% url "users:profile_detail" %}">{% trans "Profilim" %}</a>
                 <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
                    {% else %}
-    			<a id="log-in-link" class="nav-link" href="{% url 'profile_login' %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			<a id="log-in-link" class="nav-link" href="{% url "users:profile_login" %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     			<a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
 
     			</div>{% endif %}
