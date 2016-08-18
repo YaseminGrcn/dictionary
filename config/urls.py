@@ -7,9 +7,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from dictionary.users.views import profile_login, profile_detail
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    url(r'^profile_login/$', profile_login, name="profile_login"),
+    url(r'^profile_detail/$', profile_detail, name="profile_detail"),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}

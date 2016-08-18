@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render
+from django.contrib import messages
 from .models import User
+from dictionary.comments.models import CommentTitle, Comments
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -46,3 +50,39 @@ class UserListView(LoginRequiredMixin, ListView):
     # These next two lines tell the view to index lookups by username
     slug_field = 'username'
     slug_url_kwarg = 'username'
+
+def profile_login(request):
+    if request.user.is_authenticated():
+        url = reverse('base')
+        return HttpResponseRedirect(url)
+    if request.method == 'GET':
+        return render(request, "account/login.html")
+
+    elif request.method == 'POST':
+
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+
+        try:
+            authenticate_check = authenticate(username=username, password=password)
+        except User.DoesNotExist:
+            user = False
+            messages.add_message(request, messages.ERROR, 'Böyle Bir Kullanıcı Bulunamadı')
+            return HttpResponseRedirect('/login')
+
+        if authenticate_check:
+            login(request, authenticate_check)
+            messages.add_message(request, messages.INFO, 'Hoşgeldiniz ')
+            return HttpResponseRedirect('/')
+        else:
+            messages.add_message(request, messages.ERROR, 'Giriş Hatası')
+            return HttpResponseRedirect('/login/')
+
+def profile_detail(request):
+    comment = CommentTitle.objects.all()
+    user = request.user
+    context = {
+        'user' : user,
+        'comment': comment,
+    }
+    return render(request, "users/profile.html", context)

@@ -40,12 +40,16 @@
 				      </span>
 				    </div><!-- /input-group -->
     			</div>
-    			<div class="col-lg-2"></div>
+    			<div class="col-lg-2"></div>{% if request.user.is_authenticated %}
     			<div class="col-lg-2 pull-left">
-    				<a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				<a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
-    			</div>
-    			<div class="col-lg-1"></div>
+
+                <a class="nav-link" href="{% url 'profile_detail' %}">{% trans "Profilim" %}</a>
+                <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
+                   {% else %}
+    			<a id="log-in-link" class="nav-link" href="{% url 'profile_login' %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			<a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
+
+    			</div>{% endif %}
     		</div>
     		<div class="row" style="padding-top:10px;">
     			<div class="col-lg-1"></div>
@@ -88,132 +92,24 @@
 
     <div class="container-fluid">
     	<div class="row">
-    		<div class="col-lg-1"></div>
-    		<div class="col-lg-2">
+    		<div class="col-lg-4">
     			<h3>Popüler</h3>
-    			<ul class="nav nav-tabs">
+            	<ul class="nav nav-tabs">
     				<li role="presentation" class="active"><a href="#">gundem</a></li>
     			</ul>
-    			<ul class="nav nav-pills nav-stacked">
-    				<li>
-    				<a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet</a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit</a></li>
-    				<li><a href="#">lorem ipsum dolor sit </a></li>
-    				<li><a href="#">lorem ipsum dolor sit, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet</a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit</a></li>
-    				<li><a href="#">lorem ipsum dolor sit </a></li>
-    				<li><a href="#">lorem ipsum dolor sit, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor</a></li>
-    				<li><a href="#">lorem ipsum dolor </a></li>
-    				<li><a href="#">lorem ipsum dolor sit amet, consectetur</a></li>
-    				<li><a href="#">lorem ipsum dolor sit consectetur</a></li>
-    			</ul>
+                {% for c in comment %}
+                    <ul>
+                    <li>{{ c.title }}</li>
+                    </ul>
+
+                {% endfor %}
     		</div>
             {% block content %}
     		<div class="col-lg-8">
-    			<div class="baslik">
-    				<h3>Gündemdeki olay başlığı 1</h3>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex accusamus harum repellendus sequi eligendi alias, aliquam possimus consequatur, quidem obcaecati cum ducimus, cumque tempore adipisci libero dignissimos et odio. Unde.</p>
-    				<i class="fa fa-angle-up fa-2x"></i>
-    				<i class="fa fa-angle-down fa-2x"></i>
-    				<p class="pull-right">07.08.2016 12:05
-						<a href="#">nickname</a>
-						<a href="#">...</a>
-					</p>
-					<h3>Gündemdeki olay başlığı 1</h3>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex accusamus harum repellendus sequi eligendi alias, aliquam possimus consequatur, quidem obcaecati cum ducimus, cumque tempore adipisci libero dignissimos et odio. Unde.</p>
-    				<i class="fa fa-angle-up fa-2x"></i>
-    				<i class="fa fa-angle-down fa-2x"></i>
-    				<p class="pull-right">07.08.2016 12:05
-						<a href="#">nickname</a>
-						<a href="#">...</a>
-					</p>
-					<h3>Gündemdeki olay başlığı 1</h3>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex accusamus harum repellendus sequi eligendi alias, aliquam possimus consequatur, quidem obcaecati cum ducimus, cumque tempore adipisci libero dignissimos et odio. Unde.</p>
-    				<i class="fa fa-angle-up fa-2x"></i>
-    				<i class="fa fa-angle-down fa-2x"></i>
-    				<p class="pull-right">07.08.2016 12:05
-						<a href="#">nickname</a>
-						<a href="#">...</a>
-					</p>
-					<h3>Gündemdeki olay başlığı 1</h3>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex accusamus harum repellendus sequi eligendi alias, aliquam possimus consequatur, quidem obcaecati cum ducimus, cumque tempore adipisci libero dignissimos et odio. Unde.</p>
-    				<i class="fa fa-angle-up fa-2x"></i>
-    				<i class="fa fa-angle-down fa-2x"></i>
-    				<p class="pull-right">07.08.2016 12:05
-						<a href="#">nickname</a>
-						<a href="#">...</a>
-					</p>
-					<h3>Gündemdeki olay başlığı 1</h3>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex accusamus harum repellendus sequi eligendi alias, aliquam possimus consequatur, quidem obcaecati cum ducimus, cumque tempore adipisci libero dignissimos et odio. Unde.</p>
-    				<i class="fa fa-angle-up fa-2x"></i>
-    				<i class="fa fa-angle-down fa-2x"></i>
-    				<p class="pull-right">07.08.2016 12:05
-						<a href="#">nickname</a>
-						<a href="#">...</a>
-					</p>
-					<h3>Gündemdeki olay başlığı 1</h3>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex accusamus harum repellendus sequi eligendi alias, aliquam possimus consequatur, quidem obcaecati cum ducimus, cumque tempore adipisci libero dignissimos et odio. Unde.</p>
-    				<i class="fa fa-angle-up fa-2x"></i>
-    				<i class="fa fa-angle-down fa-2x"></i>
-    				<p class="pull-right">07.08.2016 12:05
-						<a href="#">nickname</a>
-						<a href="#">...</a>
-					</p>
-					<h3>Gündemdeki olay başlığı 1</h3>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex accusamus harum repellendus sequi eligendi alias, aliquam possimus consequatur, quidem obcaecati cum ducimus, cumque tempore adipisci libero dignissimos et odio. Unde.</p>
-    				<i class="fa fa-angle-up fa-2x"></i>
-    				<i class="fa fa-angle-down fa-2x"></i>
-    				<p class="pull-right">07.08.2016 12:05
-						<a href="#">nickname</a>
-						<a href="#">...</a>
-					</p>
-					<hr>
-					<ul class="nav nav-pills altMenu">
-						<li><a href="#">iletişim</a></li>
-						<li><a href="#">kullanım koşulları</a></li>
-						<li><a href="#">sss</a></li>
-						<li><a href="#">istatistikler</a></li>
-						<li><a href="#">modlog</a></li>
-						<li><a href="#">sub-etha</a></li>
-						<li><a href="#">twitter</a></li>
-						<li><a href="#">facebook</a></li>
-						<li><a href="#">google+</a></li>
-					</ul>
-    			</div>
+
 
     		</div>
              {% endblock content %}
-    		<div class="col-lg-1"></div>
     	</div>
     </div>
     {% block modal %}{% endblock modal %}

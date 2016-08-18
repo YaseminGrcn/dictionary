@@ -46,6 +46,7 @@ LOCAL_APPS = (
     # custom users app
     'dictionary.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'dictionary.comments',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
