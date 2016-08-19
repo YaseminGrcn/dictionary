@@ -13,6 +13,8 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/dictionary" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/dictionary/users" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
     </content>
     <orderEntry type="inheritedJdk" />

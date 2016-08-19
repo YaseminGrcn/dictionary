@@ -8,6 +8,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from dictionary.users import urls as users_urls
+from dictionary.topics import urls as topics_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
@@ -18,7 +19,7 @@ urlpatterns = [
     url(settings.ADMIN_URL, include(admin.site.urls)),
 
     # User management
-    url(r'^users/', include(users_urls, namespace='users')),
+    url(r'^topics/', include(topics_urls, namespace='topics')),
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here

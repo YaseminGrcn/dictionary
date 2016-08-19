@@ -10,6 +10,8 @@ from .views import *
 urlpatterns = [
     url(r'^profile_login/$', profile_login, name="profile_login"),
     url(r'^profile_detail/$', profile_detail, name="profile_detail"),
+
+
     # URL pattern for the UserListView
     url(
         regex=r'^$',

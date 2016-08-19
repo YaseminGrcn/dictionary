@@ -10,7 +10,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.contrib import messages
 from .models import User
-from dictionary.comments.models import CommentTitle, Comments
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -79,10 +78,12 @@ def profile_login(request):
             return HttpResponseRedirect('/login/')
 
 def profile_detail(request):
-    comment = CommentTitle.objects.all()
     user = request.user
     context = {
         'user' : user,
-        'comment': comment,
     }
     return render(request, "users/profile.html", context)
+
+
+
+
