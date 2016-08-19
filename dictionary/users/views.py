@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.contrib import messages
 from .models import User
+from django.shortcuts import get_object_or_404
+from dictionary.topics.models import Topic, Category, Entry, Favoutire
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -77,12 +79,24 @@ def profile_login(request):
             messages.add_message(request, messages.ERROR, 'Giriş Hatası')
             return HttpResponseRedirect('/login/')
 
-def profile_detail(request):
-    user = request.user
+def profile_detail(request, id):
+    user = get_object_or_404(User, id=id)
+    topic = Topic.objects.all()
     context = {
-        'user' : user,
+        'user': user,
+        'topic': topic,
     }
     return render(request, "users/profile.html", context)
+def base(request):
+    user = request.user
+    topic = Topic.objects.all()
+    category = Category.objects.all()
+    context = {
+        'user': user,
+        'topic': topic,
+        'category': category,
+    }
+    return render(request, "base.html", context)
 
 
 

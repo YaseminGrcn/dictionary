@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Dictionary" %}{% endblock %}
+{% block sidebar %}
+
+{% endblock sidebar %}
+
+{% block content %}
+
+
+                    {% for c in entry %}
+	                <h3>{{ c.content }}</h3>
+    				<p></p>
+    				<a href="#"><i class="fa fa-angle-up fa-2x"></i></a>
+    				<a href="#"><i class="fa fa-angle-down fa-2x"></i></a>
+    				<p class="pull-right">{{ c.created_at }}
+						<a href="{% url "users:profile_detail" user.id %}">{{ c.user.username }}</a>
+					</p>
+
+                {% endfor %}
+
+
+{% endblock content %}

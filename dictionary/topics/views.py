@@ -10,11 +10,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.contrib import messages
 from .models import User
+from dictionary.topics.models import Topic, Category, Entry, Favoutire
 
-def profile_detail(request):
-    user = request.user
+def topic(request, id):
+    topic = Topic.objects.all()
+    category = Category.objects.all()
+    entry = Entry.objects.select_related("topic").filter(topic_id=id)
+
     context = {
-        'user' : user,
+        'entry': entry,
+        'topic': topic,
+        'category': category,
     }
-    return render(request, "users/profile.html", context)
+    return render(request, "topic/topic.html", context)
 

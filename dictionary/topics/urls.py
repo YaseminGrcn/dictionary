@@ -8,5 +8,5 @@ from . import views
 from .views import *
 
 urlpatterns = [
-
+    url(r'^topic/(?P<id>[0-9]+)/$', topic, name="topic"),
 ]

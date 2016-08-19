@@ -9,9 +9,10 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from dictionary.users import urls as users_urls
 from dictionary.topics import urls as topics_urls
+from dictionary.users.views import base
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    url(r'^$', base, name='base'),
     url(r'^users/', include(users_urls, namespace="users")),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 

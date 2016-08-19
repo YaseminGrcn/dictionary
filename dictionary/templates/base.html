@@ -44,10 +44,10 @@
     			<div class="col-lg-2"></div>{% if request.user.is_authenticated %}
     			<div class="col-lg-2 pull-left">
 
-                <a class="nav-link" href="{% url "users:profile_detail" %}">{% trans "Profilim" %}</a>
+                <a class="nav-link" href="{% url "users:profile_detail" user.id %}">{% trans "Profilim" %}</a>
                 <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
                    {% else %}
-    			<a id="log-in-link" class="nav-link" href="{% url "users:profile_login" %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			<a id="log-in-link" class="nav-link" href="{% url "users:profile_login"  %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     			<a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
 
     			</div>{% endif %}
@@ -68,16 +68,9 @@
 						   	 ...
 						  	</button>
 						  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    	<li><a href="#">#anket</a></li>
-						    	<li><a href="#">#bilim</a></li>
-						    	<li><a href="#">#ekonomi</a></li>
-								<li><a href="#">#havacılık</a></li>
-								<li><a href="#">#oyun</a></li>
-								<li><a href="#">#sinema</a></li>
-								<li><a href="#">#magazin</a></li>
-								<li><a href="#">#motosiklet</a></li>
-						    	<li role="separator" class="divider"></li>
-						    	<li><a href="#">başıboşlar</a></li>
+                                {% for cat in category %}
+						    	<li><a href="#">{{ cat.title }}</a></li>
+                                {% endfor %}
 						  	</ul>
 					  	</li>
     				</ul>
@@ -94,7 +87,15 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-{% block sidebar %}
+        	<h3>Popüler</h3>
+    			<ul class="nav nav-tabs">
+    				<li role="presentation" class="active"><a href="#">gundem</a></li>
+    			</ul>
+
+            {% for c in topic %}
+	            <a href="{% url 'topics:topic' c.id %}"><h4>{{ c.title }}</h4></a>
+            {% endfor %}
+            {% block sidebar %}
             {% endblock sidebar %}
         </div>
         </div>

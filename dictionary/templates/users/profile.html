@@ -10,11 +10,7 @@
 {% endblock sidebar %}
 {% block content %}
 
-        		<div class="col-lg-8">
-    			<div class="baslik">
-
-
-		    				<h3>{{ request.user.username }}</h3>
+		    				<h3>{{ user.username }}</h3>
 		    				<a href="#">badilere ekle</a>
 		    				<ul class="nav nav-pills">
 		    					<li>118</li>
@@ -102,8 +98,6 @@
 									<li><a href="#">facebook</a></li>
 									<li><a href="#">google+</a></li>
 								</ul>
-    			</div>
 
-    		</div>
 
 {% endblock content %}

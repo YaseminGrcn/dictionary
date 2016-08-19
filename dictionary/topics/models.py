@@ -5,20 +5,21 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext_lazy as _
-
+from django.utils.encoding import python_2_unicode_compatible
 from dictionary.users.models import User
 from .signals import check_junior
 
-
+@python_2_unicode_compatible
 class Category(models.Model):
     title = models.CharField(
         max_length=50,
+        verbose_name=_("Title")
     )
 
     def __str__(self):
         return "#{title}".format(title=self.title)
 
-
+@python_2_unicode_compatible
 class Topic(models.Model):
     user = models.ForeignKey(
         User,
@@ -43,8 +44,10 @@ class Topic(models.Model):
         verbose_name = _("Baslik")
         verbose_name_plural = _("Basliklar")
         ordering = ('created_at',)
+    def __str__(self):
+        return self.titl
 
-
+@python_2_unicode_compatible
 class Entry(models.Model):
     user = models.ForeignKey(
         User,
@@ -61,10 +64,12 @@ class Entry(models.Model):
         auto_now=True,
         verbose_name=_("Created at")
     )
+    def __str__(self):
+        return self.content
 
 signals.post_save.connect(check_junior, sender=Entry)
 
-
+@python_2_unicode_compatible
 class Favoutire(models.Model):
     entry = models.ForeignKey(
         Entry
@@ -75,3 +80,6 @@ class Favoutire(models.Model):
 
     class Meta:
         unique_together = (('entry', 'user'),)
+
+    def __str__(self):
+        return self.username
