@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ('user', 'title')
+    list_display = ('user', 'title',)
     search_fields = ('title',)
     list_filter = (
         ('user', admin.RelatedOnlyFieldListFilter),

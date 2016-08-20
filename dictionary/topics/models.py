@@ -45,7 +45,7 @@ class Topic(models.Model):
         verbose_name_plural = _("Basliklar")
         ordering = ('created_at',)
     def __str__(self):
-        return self.titl
+        return self.title
 
 @python_2_unicode_compatible
 class Entry(models.Model):
