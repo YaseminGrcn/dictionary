@@ -90,6 +90,7 @@ def profile_detail(request, id):
 def base(request):
     user = request.user
     topic = Topic.objects.all()
+
     category = Category.objects.all()
     context = {
         'user': user,

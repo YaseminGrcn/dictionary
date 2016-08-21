@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
-
+from django.db import IntegrityError
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -23,4 +23,5 @@ def topic(request, id):
         'category': category,
     }
     return render(request, "topic/topic.html", context)
+
 

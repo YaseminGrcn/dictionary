@@ -44,7 +44,7 @@
     			<div class="col-lg-2"></div>{% if request.user.is_authenticated %}
     			<div class="col-lg-2 pull-left">
 
-                <a class="nav-link" href="{% url "users:profile_detail" user.id %}">{% trans "Profilim" %}</a>
+                <a class="nav-link" href="{% url "users:profile_detail" request.user.id %}">{% trans "Profilim" %}</a>
                 <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
                    {% else %}
     			<a id="log-in-link" class="nav-link" href="{% url "users:profile_login"  %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -99,11 +99,15 @@
             {% endblock sidebar %}
         </div>
         </div>
+
+
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
+
 {% block content %}
 {% endblock content %}
+
 
 
           </div></div>
