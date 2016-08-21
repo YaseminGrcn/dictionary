@@ -9,4 +9,5 @@ from .views import *
 
 urlpatterns = [
     url(r'^topic/(?P<id>[0-9]+)/$', topic, name="topic"),
+    url(r'^new_entry/$', new_entry, name="new_entry"),
 ]

@@ -24,4 +24,15 @@ def topic(request, id):
     }
     return render(request, "topic/topic.html", context)
 
+def new_entry(request):
+    if request.method == 'POST':
+        content = request.POST.get('content', None)
+        if len(content) == 0:
+            messages.add_message(request, messages.ERROR, 'Lütfen Eksiksiz Doldurunuz')
+            return HttpResponseRedirect('/')
+        else:
+            entry = Entry.objects.create(content=content, topic_id=5, user_id=request.user.id)
+            print(5)
+            entry.save()
+    return HttpResponseRedirect('/')
 
