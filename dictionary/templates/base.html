@@ -13,7 +13,10 @@
     <!-- Bootstrap -->
      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-        <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+     <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+     <link href="{% static 'css/giris.css' %}" rel="stylesheet">
+     <link href="{% static 'css/gundem.css' %}" rel="stylesheet">
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,11 +44,14 @@
 				      </span>
 				    </div><!-- /input-group -->
     			</div>
-    			<div class="col-lg-2"></div>{% if request.user.is_authenticated %}
-    			<div class="col-lg-2 pull-left">
+    			<div class="col-lg-4"></div>{% if request.user.is_authenticated %}
+    			<div class="col-lg-4 pull-left">
 
                 <a class="nav-link" href="{% url "users:profile_detail" request.user.id %}">{% trans "Profilim" %}</a>
-                <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
+                <a class="mesaj btn" href="#"><i class="fa fa-comment-o"></i> mesajlar</a>
+                <a class="mesaj btn" href="#"><i class="fa fa-comment-o"></i> olaylar</a>
+                    <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
+
                    {% else %}
     			<a id="log-in-link" class="nav-link" href="{% url "users:profile_login"  %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     			<a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
