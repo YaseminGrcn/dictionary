@@ -109,7 +109,7 @@
 {% endblock content %}
 
         {% if request.user.is_authenticated %}
-                     <form accept-charset="UTF-8" action="{% url 'topics:new_entry'  %}" method="POST" role="form">
+                     <form accept-charset="UTF-8" action="{% url 'topics:new_entry' %}" method="POST" role="form">
                     {% csrf_token %}
                    <div class="form-group">
                       <textarea class="form-control" rows="5" name="content" placeholder="konu hakkında bilgi veriniz"></textarea><br>

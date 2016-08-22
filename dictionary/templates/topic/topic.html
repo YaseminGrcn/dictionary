@@ -12,15 +12,31 @@
 {% block content %}
 
 
-                    {% for c in entry %}
+                    {% for c in contacts %}
 	                <h3>{{ c.content }}</h3>
     				<p></p>
-    				<a href="#"><i class="fa fa-angle-up fa-2x"></i></a>
-    				<a href="#"><i class="fa fa-angle-down fa-2x"></i></a>
+    				<a href="{% url 'topics:like' c.id %}"><i class="fa fa-angle-up fa-2x"></i></a>
+    				<a href="{% url 'topics:delete_like' c.id %}"><i class="fa fa-angle-down fa-2x"></i></a>
     				<p class="pull-right">{{ c.created_at }}
 						<a href="{% url "users:profile_detail" user.id %}">{{ c.user.username }}</a>
 					</p>
 
                 {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 
 {% endblock content %}

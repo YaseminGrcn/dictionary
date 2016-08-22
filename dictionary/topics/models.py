@@ -72,7 +72,7 @@ signals.post_save.connect(check_junior, sender=Entry)
 @python_2_unicode_compatible
 class Favoutire(models.Model):
     entry = models.ForeignKey(
-        Entry
+        Entry,
     )
     user = models.ForeignKey(
         User,
@@ -83,3 +83,4 @@ class Favoutire(models.Model):
 
     def __str__(self):
         return self.username
+

@@ -3,11 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django import forms
 from django.contrib import admin
-from .models import (
-    Category,
-    Topic,
-    Entry
-)
+from .models import (Category, Topic, Entry, Favoutire)
 
 
 @admin.register(Category)
@@ -28,4 +24,8 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(Entry)
 class EntryAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+
+@admin.register(Favoutire)
+class FavouriteAdmin(admin.ModelAdmin):
     list_display = ('user',)
