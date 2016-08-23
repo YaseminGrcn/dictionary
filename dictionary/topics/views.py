@@ -18,6 +18,7 @@ from dictionary.topics.models import Topic, Category, Entry, Favoutire
 
 def topic(request, id):
     topic = Topic.objects.all()
+    total = Favoutire.objects.filter(entry_id=id).count()
     contact_list = Entry.objects.select_related("topic").filter(topic_id=id)
     paginator = Paginator(contact_list, 5) # Show 25 contacts per page
 
@@ -35,6 +36,7 @@ def topic(request, id):
         'topic': topic,
         'category': category,
         'contacts': contacts,
+        'total': total,
     }
     return render(request, "topic/topic.html", context)
 
