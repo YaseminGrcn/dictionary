@@ -11,4 +11,5 @@ urlpatterns = [
 
     url(r'^event_index/$', event_index, name="event_index"),
     url(r'^event/(?P<id>[0-9]+)/$', event, name="event"),
+    url(r'^delete_event/(?P<id>[0-9]+)/$', delete_event, name="delete_event"),
 ]

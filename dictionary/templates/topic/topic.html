@@ -12,11 +12,13 @@
 {% block content %}
     {% for d in contacts %}
         {% if forloop.first %}
-   <h1> {{ d.topic.title }}</h1>
-            <a href="{% url 'event:event' d.topic.id %}">Takip Et</a>
+             <h1> {{ d.topic.title }}</h1>
+            {% if show_remove_link  %}
+                <a href="{% url 'event:event' d.topic.id %}" onclick="myFunction()" id="follow">Takip Et.</a>
+                {% else %}
+                <a href="{% url 'event:delete_event' d.topic.id %}" onclick="myFunction1()" id="follow">Takip Etme.</a>
+                {% endif %}
             <a href="{% url "users:profile_detail" user.id %}">{{ d.user.username }}</a>
-
-
         {% endif %}
     {% endfor %}
 
@@ -49,3 +51,15 @@
 </div>
 
 {% endblock content %}
+{% block javascript %}
+    <script>
+    function myFunction() {
+    document.getElementById("follow").innerHTML = "Takip Etme.";
+}
+    function myFunction1() {
+    document.getElementById("follow").innerHTML = "Takip Et.";
+}
+    </script>
+
+{% endblock javascript %}
+
