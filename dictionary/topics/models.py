@@ -15,6 +15,8 @@ class Category(models.Model):
         max_length=50,
         verbose_name=_("Title")
     )
+    class Meta:
+        verbose_name_plural = _("Kategoriler")
 
     def __str__(self):
         return "#{title}".format(title=self.title)
@@ -23,7 +25,8 @@ class Category(models.Model):
 class Topic(models.Model):
     user = models.ForeignKey(
         User,
-        verbose_name=_("User")
+        null=True,
+        blank=True
     )
     title = models.CharField(
         max_length=140,
@@ -51,11 +54,13 @@ class Topic(models.Model):
 class Entry(models.Model):
     user = models.ForeignKey(
         User,
-        verbose_name=_("User")
+        null=True,
+        blank=True
     )
     topic = models.ForeignKey(
         Topic,
-        verbose_name=_("Topic")
+        null=True,
+        blank=True
     )
     content = models.TextField(
         verbose_name=_("Content")
@@ -64,6 +69,9 @@ class Entry(models.Model):
         auto_now=True,
         verbose_name=_("Created at")
     )
+    class Meta:
+        verbose_name_plural = _("Yorumlar")
+
     def __str__(self):
         return self.content
 
@@ -73,13 +81,18 @@ signals.post_save.connect(check_junior, sender=Entry)
 class Favoutire(models.Model):
     entry = models.ForeignKey(
         Entry,
+        null=True,
+        blank=True
     )
     user = models.ForeignKey(
         User,
+        null=True,
+        blank=True
     )
 
     class Meta:
         unique_together = (('entry', 'user'),)
+        verbose_name_plural = _("Favoriler")
 
     def __str__(self):
         return self.username

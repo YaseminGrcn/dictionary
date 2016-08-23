@@ -19,21 +19,22 @@
                 <a href="{% url 'event:delete_event' d.topic.id %}" onclick="myFunction1()" id="follow">Takip Etme.</a>
                 {% endif %}
             <a href="{% url "users:profile_detail" user.id %}">{{ d.user.username }}</a>
+
         {% endif %}
     {% endfor %}
-
             {% for c in contacts %}
 
 	                <h3>{{ c.content }}</h3>
     				<p></p>
     				<a href="{% url 'topics:like' c.id %}"><i class="fa fa-angle-up fa-2x"></i></a>
     				<a href="{% url 'topics:delete_like' c.id %}"><i class="fa fa-angle-down fa-2x"></i></a>
-                <i class="fa fa-tint fa-1x">{{ total }}</i>
+                    <i class="fa fa-tint fa-1x">{{ total }}</i>
     				<p class="pull-right">{{ c.created_at }}
-						<a href="{% url "users:profile_detail" user.id %}">{{ c.user.username }}</a>
+					<a href="{% url "users:profile_detail" user.id %}">{{ c.user.username }}</a>
+                    <a href="#">Şikayet Et</a>
 					</p>
 
-                {% endfor %}
+            {% endfor %}
 
 <div class="pagination">
     <span class="step-links">
