@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from dictionary.users import urls as users_urls
 from dictionary.topics import urls as topics_urls
+from dictionary.event import urls as event_urls
 from dictionary.users.views import base
 
 urlpatterns = [
@@ -21,16 +22,14 @@ urlpatterns = [
 
     # User management
     url(r'^topics/', include(topics_urls, namespace='topics')),
+    url(r'^event/', include(event_urls, namespace='event')),
     url(r'^accounts/', include('allauth.urls')),
-
-    # Your stuff: custom urls includes go here
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
-    # This allows the error pages to be debugged during development, just visit
-    # these url in browser to see how these error pages look like.
+
     urlpatterns += [
         url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
         url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
