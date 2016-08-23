@@ -13,7 +13,7 @@
     {% for d in contacts %}
         {% if forloop.first %}
    <h1> {{ d.topic.title }}</h1>
-            <a href="{% url "#">Takip Et</a>
+            <a href="{% url 'event:event' d.topic.id %}">Takip Et</a>
             <a href="{% url "users:profile_detail" user.id %}">{{ d.user.username }}</a>
 
 

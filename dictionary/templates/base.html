@@ -49,7 +49,8 @@
 
                 <a class="nav-link" href="{% url "users:profile_detail" request.user.id %}">{% trans "Profilim" %}</a>
                 <a class="mesaj btn" href="#"><i class="fa fa-comment-o"></i> mesajlar</a>
-                <a class="mesaj btn" href="#"><i class="fa fa-comment-o"></i> olaylar</a>
+
+                <a class="mesaj btn" href="{% url "event:event" user.id %}"><i class="fa fa-comment-o"></i> olaylar</a>
                     <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
 
                    {% else %}

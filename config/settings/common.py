@@ -47,6 +47,7 @@ LOCAL_APPS = (
     'dictionary.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'dictionary.topics',
+    'dictionary.event',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
