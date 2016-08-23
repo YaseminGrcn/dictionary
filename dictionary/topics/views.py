@@ -53,22 +53,26 @@ def new_entry(request):
     return HttpResponseRedirect('/')
 
 def like(request, id):
-    new_like, created = Favoutire.objects.get_or_create(user=request.user, entry_id=id)
-    if not created:
-        print (5)
-    else:
-        print(4)
+    try:
+        new_like, created = Favoutire.objects.get_or_create(user=request.user, entry_id=id)
+        if not created:
+            print (5)
+        else:
+            print(4)
+    except Favoutire.DoesNotExist:
+        print ("zaten ekli")
+
     url = reverse('topics:topic', kwargs={'id': id})
     return HttpResponseRedirect(url)
 def delete_like(request, id):
 
     try:
-        like = get_object_or_404(Favoutire, id=id)
+        like = get_object_or_404(Favoutire, entry_id=id)
         like.delete()
         messages.success(request, _("favori silindi"))
-    except  MultipleObjectsReturned:
-        like = get_object_or_404(Favoutire, id=id)[0]
-        messages.warning(request, _("Favori silinirken bir hata oluştu"))
+    except Favoutire.DoesNotExist:
+        url = reverse('topics:topic', kwargs={'id': id})
+        return HttpResponseRedirect(url)
 
     url = reverse('topics:topic', kwargs={'id': id})
     return HttpResponseRedirect(url)

@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import User
-from dictionary.event.models import User, Event
+from dictionary.event.models import User, Event, Complaint
 from dictionary.topics.models import Topic
 
 def event_index(request):
