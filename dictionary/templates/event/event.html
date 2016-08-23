@@ -11,5 +11,7 @@
 
 {% block content %}
 <h1>Takip</h1>
-
+    {% for e in event %}
+       <h3> {{ e.topic.title }}</h3>
+    {% endfor %}
 {% endblock content %}

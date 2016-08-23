@@ -15,20 +15,38 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import User
 from dictionary.event.models import User, Event
+from dictionary.topics.models import Topic
 
 def event_index(request):
     event = Event.objects.all()
+    topic = Topic.objects.all()
     context = {
         'event': event,
+        'topic': topic,
     }
     return render(request, "event/event.html", context)
 
 
 def event(request, id):
+    show_remove_link = False
     new_event, created = Event.objects.get_or_create(user=request.user, topic_id=id)
     if not created:
-        print (5)
+        show_remove_link = False
+        print(show_remove_link)
     else:
-        print(4)
-    url = reverse('event:event_index')
+        show_remove_link = True
+        print(show_remove_link)
+    url = reverse('topics:topic', kwargs={'id': id})
+    return HttpResponseRedirect(url)
+
+def delete_event(request, id):
+    try:
+        event = get_object_or_404(Event, id=id)
+        event.delete()
+        messages.success(request, _("Takip silindi"))
+    except  MultipleObjectsReturned:
+        event = get_object_or_404(Event, id=id)[0]
+        messages.warning(request, _("Takip silinirken bir hata oluştu"))
+
+    url = reverse('topics:topic', kwargs={'id': id})
     return HttpResponseRedirect(url)
