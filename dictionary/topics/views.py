@@ -47,7 +47,7 @@ def new_entry(request):
             messages.add_message(request, messages.ERROR, 'Lütfen Eksiksiz Doldurunuz')
             return HttpResponseRedirect('/')
         else:
-            entry = Entry.objects.create(content=content, topic_id=5, user_id=request.user.id)
+            entry = Entry.objects.create(content=content, topic_id=1, user_id=request.user.id)
             print(5)
             entry.save()
     return HttpResponseRedirect('/')
