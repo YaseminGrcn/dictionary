@@ -9,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from dictionary.users.models import User
 from .signals import check_junior
 
+
 @python_2_unicode_compatible
 class Category(models.Model):
     title = models.CharField(
@@ -20,6 +21,7 @@ class Category(models.Model):
 
     def __str__(self):
         return "#{title}".format(title=self.title)
+
 
 @python_2_unicode_compatible
 class Topic(models.Model):
@@ -50,6 +52,7 @@ class Topic(models.Model):
     def __str__(self):
         return self.title
 
+
 @python_2_unicode_compatible
 class Entry(models.Model):
     user = models.ForeignKey(
@@ -76,6 +79,7 @@ class Entry(models.Model):
         return self.content
 
 signals.post_save.connect(check_junior, sender=Entry)
+
 
 @python_2_unicode_compatible
 class Favoutire(models.Model):
