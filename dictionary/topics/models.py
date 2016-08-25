@@ -99,5 +99,5 @@ class Favoutire(models.Model):
         verbose_name_plural = _("Favoriler")
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
