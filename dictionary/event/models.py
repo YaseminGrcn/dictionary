@@ -24,7 +24,7 @@ class Event(models.Model):
         verbose_name_plural = _("Takip Etme Olayları")
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
 @python_2_unicode_compatible
 class Complaint(models.Model):
@@ -44,6 +44,6 @@ class Complaint(models.Model):
         verbose_name_plural = _("Şikayetler")
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
 
