@@ -18,6 +18,7 @@ from dictionary.topics.models import Topic, Category, Entry, Favoutire
 
 def topic(request, id):
     topic = Topic.objects.all()
+    topic_id = Topic.objects.get(id=id)
     total = Favoutire.objects.filter(entry_id=id).count()
     contact_list = Entry.objects.select_related("topic").filter(topic_id=id)
     paginator = Paginator(contact_list, 5) # Show 25 contacts per page
@@ -36,12 +37,14 @@ def topic(request, id):
         'topic': topic,
         'category': category,
         'contacts': contacts,
+        'topic_id': topic_id.id,
         'total': total,
     }
     return render(request, "topic/topic.html", context)
 
-def new_entry(request, id):
-    topic_id = request.POST.get('topic')
+
+def entry(request):
+    topic = request.POST.get('topic')
     if request.method == 'POST':
 
         content = request.POST.get('content', None)
@@ -49,15 +52,12 @@ def new_entry(request, id):
             messages.add_message(request, messages.ERROR, 'Lütfen Eksiksiz Doldurunuz')
             return HttpResponseRedirect('/')
         else:
-            entry = Entry.objects.create(content=content, topic_id=id, user_id=request.user.id)
+            entry = Entry.objects.create(content=content, topic_id=topic, user_id=request.user.id)
             print(5)
             entry.save()
-    context = {
-        'topic_id': topic_id,
-    }
-    return render(request, 'topic/new_entry.html', context)
 
-
+    url = reverse('topics:topic', kwargs={'id': topic})
+    return HttpResponseRedirect(url)
 
 def like(request, id):
     try:
