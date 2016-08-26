@@ -31,7 +31,7 @@
                     <i class="fa fa-tint fa-1x">{{ total }}</i>
     				<p class="pull-right">{{ c.created_at }}
 					<a href="{% url "users:profile_detail" user.id %}">{{ c.user.username }}</a>
-                    <a href="#">Şikayet Et</a>
+                    <a href="{% url 'event:complaint' c.id %}">Şikayet Et</a>
 					</p>
 
             {% endfor %}
@@ -51,6 +51,18 @@
         {% endif %}
     </span>
 </div>
+            {% if request.user.is_authenticated %}
+                     <form action="{% url 'topics:new_entry'  %}" method="POST" role="form">
+                    {% csrf_token %}
+                         <input type="hidden" value="{{ topic_id }}" name="topic">
+                   <div class="form-group">
+                      <textarea class="form-control" rows="5" name="content" placeholder="konu hakkında bilgi veriniz"></textarea><br>
+                      <button class="btn btn-success">gönder</button>
+                   </div>
+            </form>
+
+        {% else %}
+        {% endif %}
 
 {% endblock content %}
 {% block javascript %}

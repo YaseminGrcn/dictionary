@@ -40,17 +40,24 @@ def topic(request, id):
     }
     return render(request, "topic/topic.html", context)
 
-def new_entry(request):
+def new_entry(request, id):
+    topic_id = request.POST.get('topic')
     if request.method == 'POST':
+
         content = request.POST.get('content', None)
         if len(content) == 0:
             messages.add_message(request, messages.ERROR, 'Lütfen Eksiksiz Doldurunuz')
             return HttpResponseRedirect('/')
         else:
-            entry = Entry.objects.create(content=content, topic_id=1, user_id=request.user.id)
+            entry = Entry.objects.create(content=content, topic_id=id, user_id=request.user.id)
             print(5)
             entry.save()
-    return HttpResponseRedirect('/')
+    context = {
+        'topic_id': topic_id,
+    }
+    return render(request, 'topic/new_entry.html', context)
+
+
 
 def like(request, id):
     try:
@@ -67,7 +74,7 @@ def like(request, id):
 def delete_like(request, id):
 
     try:
-        like = get_object_or_404(Favoutire, entry_id=id)
+        like = get_object_or_404(Favoutire, entry_id=id, user=request.user)
         like.delete()
         messages.success(request, _("favori silindi"))
     except Favoutire.DoesNotExist:

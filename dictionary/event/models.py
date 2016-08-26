@@ -6,6 +6,8 @@ from dictionary.users.models import User
 from dictionary.topics.models import Topic, Entry
 from django.utils.translation import ugettext_lazy as _
 
+
+#Takip etme olayları
 @python_2_unicode_compatible
 class Event(models.Model):
     topic = models.ForeignKey(
@@ -26,6 +28,8 @@ class Event(models.Model):
     def __str__(self):
         return self.user.username
 
+
+#şikayetler
 @python_2_unicode_compatible
 class Complaint(models.Model):
     entry = models.ForeignKey(
