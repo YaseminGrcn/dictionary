@@ -9,7 +9,8 @@ from .views import *
 
 urlpatterns = [
     url(r'^topic/(?P<id>[0-9]+)/$', topic, name="topic"),
-    url(r'^new_entry/$', new_entry, name="new_entry"),
+    url(r'^(?P<id>[0-9]+)/$', new_entry, name="new_entry"),
+
     url(r'^like/(?P<id>[0-9]+)/$', like, name="like"),
     url(r'^delete_like/(?P<id>[0-9]+)/$', delete_like, name="delete_like"),
 ]

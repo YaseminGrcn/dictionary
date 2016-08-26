@@ -82,9 +82,11 @@ def profile_login(request):
 def profile_detail(request, id):
     user = get_object_or_404(User, id=id)
     topic = Topic.objects.all()
+    topic_id = Topic.objects.get(id=id)
     context = {
         'user': user,
         'topic': topic,
+        'topic_id': topic_id,
     }
     return render(request, "users/profile.html", context)
 def base(request):
