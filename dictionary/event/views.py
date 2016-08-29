@@ -48,12 +48,13 @@ def delete_event(request, id):
 
 
 def complaint(request, id):
-    entry_id = Entry.objects.get(topic_id=id)
-    new_complaint = Complaint.objects.create(user=request.user, entry_id=entry_id.id)
-    total = Complaint.objects.filter(entry_id=entry_id.id).count()
-
+    new_complaint = Complaint.objects.create(user=request.user, entry_id=id)
+    total = Complaint.objects.filter(entry_id=id).count()
+    if total >= 2:
+        entry = Entry.objects.get(id=id)
+        entry.delete()
     context = {
         'id': id,
+        'total': total,
     }
-    url = reverse('topics:topic', kwargs={'id': id})
-    return HttpResponseRedirect(url)
+    return render(request, "topic/new_entry.html", context)
