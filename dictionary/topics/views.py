@@ -1,36 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
-from django.db import IntegrityError
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import authenticate, login, logout
-from django.core.exceptions import MultipleObjectsReturned
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import User
 from dictionary.topics.models import Topic, Category, Entry, Favoutire
+
 
 def topic(request, id):
     topic = Topic.objects.all()
     topic_id = Topic.objects.get(id=id)
     total = Favoutire.objects.filter(entry_id=id).count()
     contact_list = Entry.objects.select_related("topic").filter(topic_id=id)
-    paginator = Paginator(contact_list, 5) # Show 25 contacts per page
-
+    paginator = Paginator(contact_list, 5)
     page = request.GET.get('page')
     try:
         contacts = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         contacts = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
         contacts = paginator.page(paginator.num_pages)
     category = Category.objects.all()
     context = {
@@ -59,9 +49,10 @@ def entry(request):
     url = reverse('topics:topic', kwargs={'id': topic})
     return HttpResponseRedirect(url)
 
+
 def like(request, id):
     try:
-        new_like, created = Favoutire.objects.get_or_create(user=request.user, entry_id=id)
+        created = Favoutire.objects.create(user=request.user, entry_id=id)
         if not created:
             print (5)
         else:
@@ -69,17 +60,14 @@ def like(request, id):
     except Favoutire.DoesNotExist:
         print ("zaten ekli")
 
-    url = reverse('topics:topic', kwargs={'id': id})
-    return HttpResponseRedirect(url)
-def delete_like(request, id):
+    return render(request, "topic/new_entry.html")
 
+
+def delete_like(request, id):
     try:
-        like = get_object_or_404(Favoutire, entry_id=id, user=request.user)
+        like = Favoutire.objects.get(entry_id=id, user=request.user)
         like.delete()
         messages.success(request, _("favori silindi"))
     except Favoutire.DoesNotExist:
-        url = reverse('topics:topic', kwargs={'id': id})
-        return HttpResponseRedirect(url)
-
-    url = reverse('topics:topic', kwargs={'id': id})
-    return HttpResponseRedirect(url)
+        print("zaten silinmiş")
+    return render(request, "topic/new_entry.html")

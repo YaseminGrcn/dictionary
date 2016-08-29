@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import
-
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext_lazy as _

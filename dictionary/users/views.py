@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from django.contrib import messages
 from .models import User
 from django.shortcuts import get_object_or_404
-from dictionary.topics.models import Topic, Category, Entry, Favoutire
+from dictionary.topics.models import Topic, Category
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
