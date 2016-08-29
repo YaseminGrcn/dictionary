@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.core.exceptions import MultipleObjectsReturned
@@ -10,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from dictionary.event.models import Event, Complaint
 from dictionary.topics.models import Topic, Entry
+
 
 def event_index(request):
     event = Event.objects.all()
@@ -33,6 +33,7 @@ def event(request, id):
     url = reverse('topics:topic', kwargs={'id': id})
     return HttpResponseRedirect(url)
 
+
 def delete_event(request, id):
     try:
         event = get_object_or_404(Event, id=id, user=request.user)
@@ -45,13 +46,14 @@ def delete_event(request, id):
     url = reverse('topics:topic', kwargs={'id': id})
     return HttpResponseRedirect(url)
 
+
 def complaint(request, id):
-    entry_id = Entry.objects.get(id=id)
+    entry_id = Entry.objects.get(topic_id=id)
     new_complaint = Complaint.objects.create(user=request.user, entry_id=entry_id.id)
-    total = Complaint.objects.filter(entry_id=id).count()
+    total = Complaint.objects.filter(entry_id=entry_id.id).count()
 
     context = {
-        'total': total,
+        'id': id,
     }
-
-    return render(request, "topic/topic.html")
+    url = reverse('topics:topic', kwargs={'id': id})
+    return HttpResponseRedirect(url)
