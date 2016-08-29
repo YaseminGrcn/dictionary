@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+{% block head_title %}{% trans "Dictionary" %}{% endblock %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block content %}
+    <h1><b>{{ topic_search }}</b></h1>
+    {% for e in entry %}
+        <h4>{{ e.content }}</h4>
+    {% endfor %}
+{% endblock content %}
+{% block javascript %}
+{% endblock javascript %}
+
+
