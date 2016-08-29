@@ -53,13 +53,8 @@ def entry(request):
 def like(request, id):
     try:
         created = Favoutire.objects.create(user=request.user, entry_id=id)
-        if not created:
-            print (5)
-        else:
-            print(4)
     except Favoutire.DoesNotExist:
         print ("zaten ekli")
-
     return render(request, "topic/new_entry.html")
 
 
@@ -71,3 +66,27 @@ def delete_like(request, id):
     except Favoutire.DoesNotExist:
         print("zaten silinmiş")
     return render(request, "topic/new_entry.html")
+
+
+def search_topic(request, id):
+    topic_id = Topic.objects.get(id=id)
+
+    context = {
+        'topic_id': topic_id.id,
+    }
+    return render(request, "topic/search.html", context)
+
+
+def search(request):
+    try:
+        if request.method == 'POST':
+            search_topic = request.POST.get('search_topic', None)
+        topic_search = Topic.objects.get(title=search_topic)
+        entry = Entry.objects.filter(topic__title=search_topic)
+    except Topic.DoesNotExist:
+        print("böyle bir başlık yok")
+    context = {
+        'topic_search': topic_search,
+        'entry': entry,
+    }
+    return render(request, "topic/search.html", context)

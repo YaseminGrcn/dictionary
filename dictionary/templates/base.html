@@ -29,21 +29,19 @@
     <header style="">
     	<div class="container-fluid">
     		<div class="row">
-    			<div class="col-lg-1"></div>
-    			<div class="col-lg-1">
-    				<img src="http://placehold.it/150x40" alt="">
+    			<div class="col-lg-6 pull-right">
+               <form action="{% url 'topics:search' %}" method="POST" role="form">
+                    {% csrf_token %}
+                   <div class="form-group col-lg-3">
+                      <input class="form-control" name="search_topic" placeholder="Başlık ya da @yazar"><br>
+                       </div>
+                   <div class="form-group col-lg-1">
+                      <button class="btn btn-success">Ara</button>
+                    </div>
+            </form>
     			</div>
-    			<div class="col-lg-1"></div>
-    			<div class="col-lg-4">
-    				<div class="input-group">
-				      <input type="text" class="form-control" placeholder="Search for...">
-				      <span class="input-group-btn">
-				        <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-search"></i></button>
-				      </span>
-				    </div><!-- /input-group -->
-    			</div>
-    			<div class="col-lg-4"></div>{% if request.user.is_authenticated %}
-    			<div class="col-lg-4 pull-left">
+                {% if request.user.is_authenticated %}
+    			<div class="col-lg-6 pull-left">
 
                 <a class="nav-link" href="{% url "users:profile_detail" request.user.id %}">{% trans "Profilim" %}</a>
                 <a class="mesaj btn" href="#"><i class="fa fa-comment-o"></i> mesajlar</a>
@@ -55,7 +53,8 @@
     			<a id="log-in-link" class="nav-link" href="{% url "users:profile_login"  %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     			<a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
 
-    			</div>{% endif %}
+    			</div>
+                {% endif %}
     		</div>
     		<div class="row" style="padding-top:10px;">
     			<div class="col-lg-6">
