@@ -12,6 +12,5 @@ urlpatterns = [
     url(r'^new_entry/$', entry, name="entry"),
     url(r'^like/(?P<id>[0-9]+)/$', like, name="like"),
     url(r'^delete_like/(?P<id>[0-9]+)/$', delete_like, name="delete_like"),
-    url(r'^search_topic/(?P<id>[0-9]+)/$', search_topic, name="search_topic"),
     url(r'^search/$', search, name="search"),
 ]

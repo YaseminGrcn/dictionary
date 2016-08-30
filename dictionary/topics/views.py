@@ -68,16 +68,8 @@ def delete_like(request, id):
     return render(request, "topic/new_entry.html")
 
 
-def search_topic(request, id):
-    topic_id = Topic.objects.get(id=id)
-
-    context = {
-        'topic_id': topic_id.id,
-    }
-    return render(request, "topic/search.html", context)
-
-
 def search(request):
+    topic = Topic.objects.all()
     try:
         if request.method == 'POST':
             search_topic = request.POST.get('search_topic', None)
@@ -88,5 +80,6 @@ def search(request):
     context = {
         'topic_search': topic_search,
         'entry': entry,
+        'topic': topic,
     }
     return render(request, "topic/search.html", context)
