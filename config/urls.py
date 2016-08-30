@@ -11,16 +11,16 @@ from dictionary.users import urls as users_urls
 from dictionary.topics import urls as topics_urls
 from dictionary.event import urls as event_urls
 from dictionary.users.views import base
+from dictionary.contact import urls as contact_urls
 
 urlpatterns = [
     url(r'^$', base, name='base'),
     url(r'^users/', include(users_urls, namespace="users")),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
-
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, include(admin.site.urls)),
-
     # User management
+    url(r'^contact/', include(contact_urls, namespace='contact')),
     url(r'^topics/', include(topics_urls, namespace='topics')),
     url(r'^event/', include(event_urls, namespace='event')),
     url(r'^accounts/', include('allauth.urls')),

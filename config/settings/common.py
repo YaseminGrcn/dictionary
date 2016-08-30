@@ -48,6 +48,7 @@ LOCAL_APPS = (
     # Your stuff: custom apps go here
     'dictionary.topics',
     'dictionary.event',
+    'dictionary.contact',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -86,6 +87,7 @@ FIXTURE_DIRS = (
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
