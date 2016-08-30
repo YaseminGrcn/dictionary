@@ -18,6 +18,8 @@
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dictionary/topics" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dictionary/event" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/dictionary/messages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/dictionary/contact" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
     </content>
     <orderEntry type="inheritedJdk" />

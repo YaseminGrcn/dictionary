@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dictionary.topics.models import Topic, Category, Entry, Favoutire
 
 
+
 def topic(request, id):
     topic = Topic.objects.all()
     topic_id = Topic.objects.get(id=id)
@@ -75,11 +76,31 @@ def search(request):
             search_topic = request.POST.get('search_topic', None)
         topic_search = Topic.objects.get(title=search_topic)
         entry = Entry.objects.filter(topic__title=search_topic)
+        context = {
+            'topic_search': topic_search,
+            'entry': entry,
+            'topic': topic,
+        }
+        return render(request, "topic/search.html", context)
     except Topic.DoesNotExist:
-        print("böyle bir başlık yok")
+        url = reverse('topics:add_topic')
+        return HttpResponseRedirect(url)
+
+def add_topic(request):
+    topic = Topic.objects.all()
+    if request.method == 'POST':
+
+        title = request.POST.get('title', None)
+        if len(title) == 0:
+            messages.add_message(request, messages.ERROR, 'Lütfen Eksiksiz Doldurunuz')
+            return HttpResponseRedirect('/')
+        else:
+            topic = Topic.objects.create(title=title, user_id=request.user.id)
+            print(5)
+            topic.save()
     context = {
-        'topic_search': topic_search,
-        'entry': entry,
         'topic': topic,
     }
-    return render(request, "topic/search.html", context)
+    return render(request, "topic/add_topic.html", context)
+
+
