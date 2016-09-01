@@ -1,14 +1,10 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 {% load account socialaccount %}
 {% load crispy_forms_tags %}
-
 {% block head_title %}{% trans "Dictionary" %}{% endblock %}
 {% block sidebar %}
-
 {% endblock sidebar %}
-
 {% block content %}
     {% for d in contacts %}
         {% if forloop.first %}
@@ -35,7 +31,6 @@
 					</p>
 
             {% endfor %}
-
 <div class="pagination">
     <span class="step-links">
         {% if contacts.has_previous %}
@@ -63,7 +58,6 @@
 
         {% else %}
         {% endif %}
-
 {% endblock content %}
 {% block javascript %}
 {% endblock javascript %}

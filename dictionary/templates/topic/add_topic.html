@@ -1,14 +1,10 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 {% load account socialaccount %}
 {% load crispy_forms_tags %}
-
 {% block head_title %}{% trans "Dictionary" %}{% endblock %}
 {% block sidebar %}
-
 {% endblock sidebar %}
-
 {% block content %}
     <h1>Böyle bir şey yok...</h1>
             {% if request.user.is_authenticated %}
@@ -20,10 +16,8 @@
                       <button class="btn btn-success">gönder</button>
                     </div>
             </form>
-
         {% else %}
         {% endif %}
-
 {% endblock content %}
 {% block javascript %}
 {% endblock javascript %}

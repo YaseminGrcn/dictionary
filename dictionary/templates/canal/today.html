@@ -1,14 +1,10 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 {% load account socialaccount %}
 {% load crispy_forms_tags %}
-
 {% block head_title %}{% trans "Dictionary" %}{% endblock %}
 {% block sidebar %}
-
 {% endblock sidebar %}
-
 {% block content %}
     {% for d in contacts %}
         {% if forloop.first %}
@@ -24,7 +20,6 @@
         {% endif %}
     {% endfor %}
             {% for c in contacts %}
-
 	                <h3>{{ c.content }}</h3>
     				<p></p>
     				<a href="{% url 'topics:like' c.id %}"><i class="fa fa-angle-up fa-2x"></i></a>
@@ -36,19 +31,15 @@
                         {% endif %}
                     <a href="{% url 'event:complaint' c.id %}">Şikayet Et</a>
 					</p>
-
             {% endfor %}
-
 <div class="pagination">
     <span class="step-links">
         {% if contacts.has_previous %}
             <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
-
         <span class="current">
             Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
         </span>
-
         {% if contacts.has_next %}
             <a href="?page={{ contacts.next_page_number }}">next</a>
         {% endif %}
@@ -63,10 +54,8 @@
                       <button class="btn btn-success">gönder</button>
                     </div>
             </form>
-
         {% else %}
         {% endif %}
-
 {% endblock content %}
 {% block javascript %}
 {% endblock javascript %}
