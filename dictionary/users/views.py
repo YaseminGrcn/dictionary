@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
@@ -11,7 +9,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from .models import User
 from django.shortcuts import get_object_or_404
-from dictionary.topics.models import Topic, Category
+from dictionary.topics.models import Topic, Category, Entry, Favoutire
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -52,6 +50,7 @@ class UserListView(LoginRequiredMixin, ListView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
+
 def profile_login(request):
     if request.user.is_authenticated():
         url = reverse('base')
@@ -79,6 +78,7 @@ def profile_login(request):
             messages.add_message(request, messages.ERROR, 'Giriş Hatası')
             return HttpResponseRedirect('/login/')
 
+
 def profile_detail(request, id):
     user = get_object_or_404(User, id=id)
     topic = Topic.objects.all()
@@ -89,6 +89,8 @@ def profile_detail(request, id):
         'topic_id': topic_id,
     }
     return render(request, "users/profile.html", context)
+
+
 def base(request):
     user = request.user
     topic = Topic.objects.all()
@@ -102,5 +104,7 @@ def base(request):
     return render(request, "base.html", context)
 
 
+def user_settings(request):
+    return render(request, "users/user_settings.html")
 
 
