@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^profile_login/$', profile_login, name="profile_login"),
     url(r'^profile_detail/(?P<id>[0-9]+)/$', profile_detail, name="profile_detail"),
     url(r'^base/$', base, name="base"),
+    url(r'^user_settings/$', user_settings, name="user_settings"),
 
 
     # URL pattern for the UserListView
@@ -40,6 +41,4 @@ urlpatterns = [
         view=views.UserUpdateView.as_view(),
         name='update'
     ),
-
-
 ]

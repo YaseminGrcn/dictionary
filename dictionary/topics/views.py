@@ -9,12 +9,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dictionary.topics.models import Topic, Category, Entry, Favoutire
 
 
-
 def topic(request, id):
     topic = Topic.objects.all()
     topic_id = Topic.objects.get(id=id)
     total = Favoutire.objects.filter(entry_id=id).count()
-    contact_list = Entry.objects.select_related("topic").filter(topic_id=id)
+    contact_list = Entry.objects.filter(topic_id=id)
     paginator = Paginator(contact_list, 5)
     page = request.GET.get('page')
     try:
@@ -41,7 +40,7 @@ def entry(request):
         content = request.POST.get('content', None)
         if len(content) == 0:
             messages.add_message(request, messages.ERROR, 'Lütfen Eksiksiz Doldurunuz')
-            return HttpResponseRedirect('/')
+            print("Lütfen eksiksiz doldurunuz...")
         else:
             entry = Entry.objects.create(content=content, topic_id=topic, user_id=request.user.id)
             print(5)
@@ -86,10 +85,9 @@ def search(request):
         url = reverse('topics:add_topic')
         return HttpResponseRedirect(url)
 
-def add_topic(request):
-    topic = Topic.objects.all()
-    if request.method == 'POST':
 
+def add_topic(request):
+    if request.method == 'POST':
         title = request.POST.get('title', None)
         if len(title) == 0:
             messages.add_message(request, messages.ERROR, 'Lütfen Eksiksiz Doldurunuz')
@@ -98,9 +96,6 @@ def add_topic(request):
             topic = Topic.objects.create(title=title, user_id=request.user.id)
             print(5)
             topic.save()
-    context = {
-        'topic': topic,
-    }
-    return render(request, "topic/add_topic.html", context)
+    return render(request, "topic/add_topic.html")
 
 

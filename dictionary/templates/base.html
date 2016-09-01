@@ -26,60 +26,47 @@
   <script src="https://use.fontawesome.com/f9ca6ec379.js"></script>
   </head>
   <body>
-    <header style="">
-    	<div class="container-fluid">
-          <div class="row">
-           			<div class="col-lg-1"></div>
-    			<div class="col-lg-1">
-    			</div>
-
-            <div class="col-lg-4">
-               <form action="{% url 'topics:search' %}" method="POST" role="form">
-                    {% csrf_token %}
-                   <div class="form-group">
-
-                      <input class="form-control" name="search_topic" placeholder="Başlık ya da @yazar ara..."><br>
-                    </div>
-                </form>
-            </div>
-                 {% if request.user.is_authenticated %}
-    			<div class="col-lg-6 pull-left">
-
-                    <a class="nav-link" href="{% url "users:profile_detail" request.user.id %}">{% trans "Profilim" %}</a>
-                    <a class="mesaj btn" href="{% url "contact:contact" %}"><i class="fa fa-comment-o"></i> mesajlar</a>
-                    <a class="mesaj btn" href="{% url "event:event" user.id %}"><i class="fa fa-comment-o"></i> olaylar</a>
-                    <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Ekşi Sözlük</a>
+            <a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bugün</a>
+            <a class="navbar-brand" href="#">popüler</a>
+            <a class="navbar-brand" href="#">badi</a>
+    		<a class="navbar-brand" href="#">çaylaklar</a>
+    		<a class="navbar-brand" href="#">#spor</a>
+    		<a class="navbar-brand" href="#">#edebiyat</a>
+    		<a class="navbar-brand" href="#">#siyaset</a>
+            <button class="btn ucNokta dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                 ...
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  {% for cat in category %}
+                    <li><a href="#">{{ cat.title }} {{ cat.total }}</a></li>
+                  {% endfor %}
+                </ul>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              {% if request.user.is_authenticated %}
+                    <a href="{% url "users:profile_detail" request.user.id %}">{% trans "Profilim" %}</a>
+                    <a href="{% url "contact:contact" %}"><i class="fa fa-comment-o"></i> mesajlar</a>
+                    <a href="{% url "event:event" user.id %}"><i class="fa fa-comment-o"></i> olaylar</a>
+                    <a href="{% url 'account_logout' %}">{% trans "Çıkış Yap" %}</a>
+                    <a href="{% url 'users:user_settings' %}">{% trans "Ayarlar" %}</a>
                   {% else %}
-    			    <a id="log-in-link" class="nav-link" href="{% url "users:profile_login"  %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    			    <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
-    			</div>
+    			    <a href="{% url "users:profile_login"  %}">{% trans "Giriş Yap" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			    <a  href="{% url 'account_signup' %}">{% trans "Kayıt Ol" %}</a>
+
                   {% endif %}
-    	   </div>
-    		<div class="row" style="padding-top:10px;">
-    			<div class="col-lg-6">
-    				<ul class="nav nav-pills ustMenu">
-    					<li><a href="">bugün</a></li>
-    					<li><a href="">popüler</a></li>
-    					<li><a href="">badi</a></li>
-    					<li><a href="">çaylaklar</a></li>
-    					<li><a href="">#spor</a></li>
-    					<li><a href="">#edebiyat</a></li>
-    					<li><a href="">#siyaset</a></li>
-	    				<li class="drop">
-	    					<button class="btn ucNokta dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						   	 ...
-						  	</button>
-						  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                {% for cat in category %}
-						    	<li><a href="#">{{ cat.title }}</a></li>
-                                {% endfor %}
-						  	</ul>
-					  	</li>
-    				</ul>
-    			</div>
-    		</div>
-    	</div>
-    </header>
+          </ul>
+          <form class="navbar-form navbar-right" action="{% url 'topics:search' %}" method="POST" role="form">
+              {% csrf_token %}
+            <input class="form-control" name="search_topic" placeholder="search">
+          </form>
+        </div>
+      </div>
+    </nav>
 
     <div class="container-fluid">
       <div class="row">
